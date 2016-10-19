@@ -35,36 +35,42 @@ namespace rpn_calculator
             while (!exit)
             {
                 Console.Write("> ");
-                string input = Console.ReadLine();
-                if (input == "exit")
+                string line = Console.ReadLine();
+                string[] inputs = line.Split(' ');
+                foreach (string input in inputs)
                 {
-                    exit = true;
-                } else if (input == "peek")
-                {
-                    Console.WriteLine(stack.Peek());
-                } else if (operatortable.ContainsKey(input))
-                {
-                    Operator op = (Operator)operatortable[input];
-                    if (stack.Count() >= op.getNumberOfValues())
+                    if (input == "exit")
                     {
-                        decimal value = op.doOperation(stack);
-                        Console.WriteLine(value);
-                        stack.Push(value);
+                        exit = true;
+                    }
+                    else if (input == "peek")
+                    {
+                        Console.WriteLine(stack.Peek());
+                    }
+                    else if (operatortable.ContainsKey(input))
+                    {
+                        Operator op = (Operator)operatortable[input];
+                        if (stack.Count() >= op.getNumberOfValues())
+                        {
+                            decimal value = op.doOperation(stack);
+                            Console.WriteLine(value);
+                            stack.Push(value);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Not enought values in stack. " + op.getNumberOfValues() + " needed.");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Not enought values in stack. " + op.getNumberOfValues() + " needed.");
-                    }
-                }
-                else
-                {
-                    try
-                    {
-                        stack.Push(decimal.Parse(input));
-                    }
-                    catch (FormatException)
-                    {
-                        Console.WriteLine("Format error, not a number or an operator.");
+                        try
+                        {
+                            stack.Push(decimal.Parse(input));
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Format error, not a number or an operator.");
+                        }
                     }
                 }
             }
