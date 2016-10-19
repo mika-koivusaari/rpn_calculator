@@ -51,6 +51,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AdditionTests.cs" />
+    <Compile Include="DivisionTests.cs" />
+    <Compile Include="MinusTests.cs" />
+    <Compile Include="MultiplyTests.cs" />
     <Compile Include="PeekTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

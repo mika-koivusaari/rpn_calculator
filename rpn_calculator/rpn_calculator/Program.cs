@@ -139,4 +139,97 @@ namespace rpn_calculator
             return 1;
         }
     }
+
+    public class Minus : Operator
+    {
+        public decimal doOperation(Stack<decimal> stack)
+        {
+            decimal value1 = stack.Pop();
+            decimal value2 = stack.Pop();
+            return value2 - value1;
+        }
+
+        public string getDescription()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string getName()
+        {
+            return "Minus";
+        }
+
+        public int getNumberOfValues()
+        {
+            return 2;
+        }
+
+        public string getOperator()
+        {
+            return "-";
+        }
+
+    }
+
+    public class Multiply : Operator
+    {
+        public decimal doOperation(Stack<decimal> stack)
+        {
+            decimal value1 = stack.Pop();
+            decimal value2 = stack.Pop();
+            return value1 * value2;
+        }
+
+        public string getDescription()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string getName()
+        {
+            return "Multiply";
+        }
+
+        public int getNumberOfValues()
+        {
+            return 2;
+        }
+
+        public string getOperator()
+        {
+            return "*";
+        }
+
+    }
+
+    public class Division : Operator
+    {
+        public decimal doOperation(Stack<decimal> stack)
+        {
+            decimal value1 = stack.Pop();
+            decimal value2 = stack.Pop();
+            return value2 / value1;
+        }
+
+        public string getDescription()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string getName()
+        {
+            return "Division";
+        }
+
+        public int getNumberOfValues()
+        {
+            return 2;
+        }
+
+        public string getOperator()
+        {
+            return "/";
+        }
+
+    }
 }
