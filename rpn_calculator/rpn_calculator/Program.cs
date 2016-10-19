@@ -14,6 +14,8 @@ namespace rpn_calculator
             Hashtable operatortable = new Hashtable();
             Operator addition = new Addition();
             operatortable.Add(addition.getOperator(), addition);
+            Operator peek = new Peek();
+            operatortable.Add(peek.getOperator(), peek);
 
             return operatortable;
         }
@@ -85,6 +87,30 @@ namespace rpn_calculator
         public string getOperator()
         {
             return "+";
+        }
+    }
+
+    public class Peek : Operator
+    {
+        public decimal doOperation(Stack<decimal> stack)
+        {
+            decimal value1 = stack.Pop();
+            return value1;
+        }
+
+        public string getDescription()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string getName()
+        {
+            return "Peek";
+        }
+
+        public string getOperator()
+        {
+            return "peek";
         }
     }
 }
