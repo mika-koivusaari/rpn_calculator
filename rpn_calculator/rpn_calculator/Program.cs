@@ -39,13 +39,27 @@ namespace rpn_calculator
                 } else if (operatortable.ContainsKey(input))
                 {
                     Operator op = (Operator)operatortable[input];
-                    decimal value=op.doOperation(stack);
-                    Console.WriteLine(value);
-                    stack.Push(value);
+                    if (stack.Count() >= op.getNumberOfValues())
+                    {
+                        decimal value = op.doOperation(stack);
+                        Console.WriteLine(value);
+                        stack.Push(value);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not enought values in stack. " + op.getNumberOfValues() + " needed.");
+                    }
                 }
                 else
                 {
-                    stack.Push(Decimal.Parse(input));
+                    try
+                    {
+                        stack.Push(decimal.Parse(input));
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Format error, not a number or an operator.");
+                    }
                 }
             }
         }
@@ -63,6 +77,7 @@ namespace rpn_calculator
         string getOperator();
         decimal doOperation(Stack<decimal> stack);
         string getDescription();
+        int getNumberOfValues();
     }
 
     public class Addition : Operator
@@ -84,10 +99,16 @@ namespace rpn_calculator
             return "Addition";
         }
 
+        public int getNumberOfValues()
+        {
+            return 2;
+        }
+
         public string getOperator()
         {
             return "+";
         }
+
     }
 
     public class Peek : Operator
@@ -111,6 +132,11 @@ namespace rpn_calculator
         public string getOperator()
         {
             return "peek";
+        }
+
+        public int getNumberOfValues()
+        {
+            return 1;
         }
     }
 }
