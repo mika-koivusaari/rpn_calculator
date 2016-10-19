@@ -14,6 +14,12 @@ namespace rpn_calculator
             Hashtable operatortable = new Hashtable();
             Operator addition = new Addition();
             operatortable.Add(addition.getOperator(), addition);
+            Operator minus = new Minus();
+            operatortable.Add(minus.getOperator(), minus);
+            Operator multiply = new Multiply();
+            operatortable.Add(multiply.getOperator(), multiply);
+            Operator div = new Division();
+            operatortable.Add(div.getOperator(), div);
             Operator peek = new Peek();
             operatortable.Add(peek.getOperator(), peek);
 
