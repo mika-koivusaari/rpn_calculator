@@ -16,12 +16,12 @@ namespace rpn_calculator
 
             //get all Operators that are built-in(in this exe)
             var q = from t in Assembly.GetExecutingAssembly().GetTypes()
-                    where t.IsClass && typeof(Operator).IsAssignableFrom(t)
+                    where t.IsClass && typeof(IOperator).IsAssignableFrom(t)
                     select t;
             //and add them to operator table
             foreach (Type t in q)
             {
-                Operator op = (Operator)Activator.CreateInstance(t);
+                IOperator op = (IOperator)Activator.CreateInstance(t);
                 operatortable.Add(op.getOperator(), op);
                 Console.WriteLine("Added operator " + op.getName());
             }
@@ -52,7 +52,7 @@ namespace rpn_calculator
                     }
                     else if (operatortable.ContainsKey(input))
                     {
-                        Operator op = (Operator)operatortable[input];
+                        IOperator op = (IOperator)operatortable[input];
                         if (stack.Count() >= op.getNumberOfValues())
                         {
                             decimal value = op.doOperation(stack);
@@ -86,7 +86,7 @@ namespace rpn_calculator
         }
     }
 
-    public interface Operator
+    public interface IOperator
     {
         string getName();
         string getOperator();
@@ -95,7 +95,7 @@ namespace rpn_calculator
         int getNumberOfValues();
     }
 
-    public class Addition : Operator
+    public class Addition : IOperator
     {
         public decimal doOperation(Stack<decimal> stack)
         {
@@ -126,7 +126,7 @@ namespace rpn_calculator
 
     }
 
-    public class Peek : Operator
+    public class Peek : IOperator
     {
         public decimal doOperation(Stack<decimal> stack)
         {
@@ -155,7 +155,7 @@ namespace rpn_calculator
         }
     }
 
-    public class Minus : Operator
+    public class Minus : IOperator
     {
         public decimal doOperation(Stack<decimal> stack)
         {
@@ -186,7 +186,7 @@ namespace rpn_calculator
 
     }
 
-    public class Multiply : Operator
+    public class Multiply : IOperator
     {
         public decimal doOperation(Stack<decimal> stack)
         {
@@ -217,7 +217,7 @@ namespace rpn_calculator
 
     }
 
-    public class Division : Operator
+    public class Division : IOperator
     {
         public decimal doOperation(Stack<decimal> stack)
         {
