@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,18 +13,20 @@ namespace rpn_calculator
         public Hashtable initOperators()
         {
             Hashtable operatortable = new Hashtable();
-            Operator addition = new Addition();
-            operatortable.Add(addition.getOperator(), addition);
-            Operator minus = new Minus();
-            operatortable.Add(minus.getOperator(), minus);
-            Operator multiply = new Multiply();
-            operatortable.Add(multiply.getOperator(), multiply);
-            Operator div = new Division();
-            operatortable.Add(div.getOperator(), div);
-            Operator peek = new Peek();
-            operatortable.Add(peek.getOperator(), peek);
 
-            return operatortable;
+            //get all Operators that are built-in(in this exe)
+            var q = from t in Assembly.GetExecutingAssembly().GetTypes()
+                    where t.IsClass && typeof(Operator).IsAssignableFrom(t)
+                    select t;
+            //and add them to operator table
+            foreach (Type t in q)
+            {
+                Operator op = (Operator)Activator.CreateInstance(t);
+                operatortable.Add(op.getOperator(), op);
+                Console.WriteLine("Added operator " + op.getName());
+            }
+
+                return operatortable;
         }
 
         public void loop()
