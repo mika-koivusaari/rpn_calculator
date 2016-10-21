@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AdditionTests.cs" />
     <Compile Include="DivisionTests.cs" />
+    <Compile Include="ExponentTests.cs" />
     <Compile Include="MinusTests.cs" />
     <Compile Include="MultiplyTests.cs" />
     <Compile Include="PeekTests.cs" />
@@ -59,6 +60,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\exponentsroots\exponentsroots.csproj">
+      <Project>{ae6863c4-f82f-4c95-9ea2-d12689b66d90}</Project>
+      <Name>exponentsroots</Name>
+    </ProjectReference>
     <ProjectReference Include="..\rpn_calculator\rpn_calculator.csproj">
       <Project>{ad74841f-4b0a-4b66-be1f-6badd4c8df7f}</Project>
       <Name>rpn_calculator</Name>

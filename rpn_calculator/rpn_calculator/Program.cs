@@ -14,9 +14,13 @@ namespace rpn_calculator
         {
             Hashtable operatortable = new Hashtable();
 
-            Assembly ass = Assembly.GetExecutingAssembly();
             //get all Operators that are built-in(in this exe)
-            getOperatorsFromAssembly(operatortable, ass);
+            Assembly asm = Assembly.GetExecutingAssembly();
+            getOperatorsFromAssembly(operatortable, asm);
+
+            //get all operators from external dll
+            asm = Assembly.LoadFrom("exponentsroots.dll");
+            getOperatorsFromAssembly(operatortable, asm);
 
             return operatortable;
         }

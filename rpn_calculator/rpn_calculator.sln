@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rpn_calculator", "rpn_calcu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rpn_calculatorTests", "rpn_calcolatorTest\rpn_calculatorTests.csproj", "{0CC82C28-F30E-4C81-B578-17D0CFE9F631}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "exponentsroots", "exponentsroots\exponentsroots.csproj", "{AE6863C4-F82F-4C95-9EA2-D12689B66D90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0CC82C28-F30E-4C81-B578-17D0CFE9F631}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CC82C28-F30E-4C81-B578-17D0CFE9F631}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CC82C28-F30E-4C81-B578-17D0CFE9F631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE6863C4-F82F-4C95-9EA2-D12689B66D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE6863C4-F82F-4C95-9EA2-D12689B66D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE6863C4-F82F-4C95-9EA2-D12689B66D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE6863C4-F82F-4C95-9EA2-D12689B66D90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
