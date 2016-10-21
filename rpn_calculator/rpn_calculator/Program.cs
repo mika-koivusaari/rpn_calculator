@@ -14,19 +14,32 @@ namespace rpn_calculator
         {
             Hashtable operatortable = new Hashtable();
 
+            Assembly ass = Assembly.GetExecutingAssembly();
             //get all Operators that are built-in(in this exe)
-            var q = from t in Assembly.GetExecutingAssembly().GetTypes()
-                    where t.IsClass && typeof(IOperator).IsAssignableFrom(t)
-                    select t;
+            getOperatorsFromAssembly(operatortable, ass);
+
+            return operatortable;
+        }
+
+        private void getOperatorsFromAssembly(Hashtable operatortable,Assembly ass)
+        {
+            IEnumerable<Type> q = from t in ass.GetTypes()
+                                  where t.IsClass && typeof(IOperator).IsAssignableFrom(t)
+                                  select t;
             //and add them to operator table
             foreach (Type t in q)
             {
                 IOperator op = (IOperator)Activator.CreateInstance(t);
-                operatortable.Add(op.getOperator(), op);
-                Console.WriteLine("Added operator " + op.getName());
+                try
+                {
+                    operatortable.Add(op.getOperator(), op);
+                    Console.WriteLine("Added operator " + op.getName());
+                }
+                catch (ArgumentException)
+                {
+                    Console.WriteLine("Error: Operator " + op.getName()+" allready exists.");
+                }
             }
-
-                return operatortable;
         }
 
         public void loop()
