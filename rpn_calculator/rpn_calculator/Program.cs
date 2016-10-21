@@ -10,6 +10,9 @@ namespace rpn_calculator
 {
     class Program
     {
+
+        //Get all operators from current assembly and
+        //from specified ddl's
         public Hashtable initOperators()
         {
             Hashtable operatortable = new Hashtable();
@@ -27,6 +30,7 @@ namespace rpn_calculator
 
         private void getOperatorsFromAssembly(Hashtable operatortable,Assembly ass)
         {
+            //get types from given assembly
             IEnumerable<Type> q = from t in ass.GetTypes()
                                   where t.IsClass && typeof(IOperator).IsAssignableFrom(t)
                                   select t;
@@ -46,12 +50,14 @@ namespace rpn_calculator
             }
         }
 
+        //main loop
         public void loop()
         {
             Stack<decimal> stack = new Stack<decimal>();
             Hashtable operatortable = initOperators();
             Boolean exit = false;
 
+            //loop until user gives exit command
             while (!exit)
             {
                 Console.Write("> ");
@@ -59,14 +65,12 @@ namespace rpn_calculator
                 string[] inputs = line.Split(' ');
                 foreach (string input in inputs)
                 {
+                    //exit is hardcoded
                     if (input == "exit")
                     {
                         exit = true;
                     }
-                    else if (input == "peek")
-                    {
-                        Console.WriteLine(stack.Peek());
-                    }
+                    //all other operators are loaded classes
                     else if (operatortable.ContainsKey(input))
                     {
                         IOperator op = (IOperator)operatortable[input];
@@ -81,10 +85,11 @@ namespace rpn_calculator
                             Console.WriteLine("Not enought values in stack. " + op.getNumberOfValues() + " needed.");
                         }
                     }
-                    else
+                    else //not an operator, must be number
                     {
                         try
                         {
+                            //maybe add parsing of hex etc?
                             stack.Push(decimal.Parse(input));
                         }
                         catch (FormatException)
@@ -103,6 +108,7 @@ namespace rpn_calculator
         }
     }
 
+    //Interface that all operators must implement
     public interface IOperator
     {
         string getName();
